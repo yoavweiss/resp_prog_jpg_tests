@@ -1,0 +1,27 @@
+# Initial DC scan for Y,Cb,Cr (lowest bit not sent)
+0,1,2: 0-0,   0, 1 ;
+# First AC scan: send first 5 Y AC coefficients, minus 2 lowest bits:
+0:     1-5,   0, 4 ;
+# Send all Cr,Cb AC coefficients, minus lowest bit:
+# (chroma data is usually too small to be worth subdividing further;
+#  but note we send Cr first since eye is least sensitive to Cb)
+2:     1-63,  0, 3 ;
+1:     1-63,  0, 3 ;
+# Send remaining Y AC coefficients, minus 2 lowest bits:
+0:     6-63,  0, 4 ;
+# Send next-to-lowest bit of all Y AC coefficients:
+0:     1-63,  4, 3 ;
+2:     1-63,  3, 2 ;
+1:     1-63,  3, 2 ;
+# send rest of DC coefs
+0,1,2: 0-0,   1, 0 ;
+
+0:     1-63,  3, 2 ;
+2:     1-63,  2, 1 ;
+1:     1-63,  2, 1 ;
+
+0:     1-63,  2, 1 ;
+2:     1-63,  1, 0 ;
+1:     1-63,  1, 0 ;
+
+0:     1-63,  1, 0 ;
